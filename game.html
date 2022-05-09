@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A flashcard game that supercharges studying"
+    />
+    <meta name="author" content="Barbara Malta" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flipping Flashcards session</title>
+
+    <!-- favicons -->
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <!-- styles, fonts -->
+    <link rel="preload" href="img/galaxy-neon.png" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&family=Supermercado+One&display=swap" rel="stylesheet">
+    <!-- <link href="styles/classic.css" rel="stylesheet"> -->
+    <link href="styles/whiter.css" rel="stylesheet">
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/cdc678f69f.js" crossorigin="anonymous"></script>
+    <script src="js/jquery.flip.min.js" charset="utf-8" defer></script>
+    <script src="js/swiped-events.js" charset="utf-8" defer></script>
+    <script src="js/sophisticated.js" charset="utf-8" defer></script>
+  </head>
+
+<body>
+
+
+  <div class="container">
+
+    <nav class="right-menu">
+      <ul>
+        <li>
+          <h2 class="functional" id="loadset" title="Load new set"><i class="fa-solid fa-arrows-rotate"></i></h2>
+          </li>
+          <li>
+          <h2 class="functional" id="about" title="Instructions"><i class="fa-solid fa-question"></i></h2>
+    </li>
+    <li>
+          <h2 class="functional" id="options" title="Options"><i class="fa-solid fa-gear"></i></h2>
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="left-menu">
+      <div class="title-section">
+      <a href="index.html"><h2 class="functional" id="about" title="Back to home screen"><i class="fa-solid fa-angle-left"></i></h2></a>
+          <h3>Flipping<br>Flashcards</h3>
+      </div>
+      <div class="info-section">
+        <p>
+          <strong>Title of the set</strong>
+        </p>
+        <hr>
+        <p>
+          avg rating 
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </p>
+        <hr>
+        <p>
+          current card <strong>3/15</strong>
+        </p>
+        <hr>
+        <p>
+          card rating 
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </p>
+      </div>
+    </nav>
+
+
+    <!-- card section begins -->
+<div id="containcard" class="disappear">
+    <div class="flip" id="card">
+      <div class="front" id="question">
+        <h2>Welcome to flipping flashcards!</h2>
+      </div>
+      
+      <div class="back">
+        <div id="answer">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit aperiam hic nemo repellat doloribus sint aliquid. Dolore dolores ex iste eaque cumque laboriosam, quam architecto nesciunt ipsum et eius?
+      </div>
+        <!-- <div class="tickform disappear"></div> -->
+
+        <!-- <div class="tickform">
+          did you know the answer?
+          <br>
+          <button id="good" class="btn smallbutt"><i class="fa-solid fa-check"></i></button>
+          <button id="medium" class="btn smallbutt"><i class="fa-solid fa-question"></i></button>
+          <button id="bad" class="btn smallbutt"><i class="fa-solid fa-xmark"></i></button>
+        </div> -->
+
+        <div class="card-menu">
+          <div class="rating-question">did you know the answer?</div>
+          <hr>
+          <div class="tickform">
+            <div id="bad" class="btn" title="no"><h3><i class="fa-solid fa-star"></i></h3></div>
+            <div id="medium" class="btn" title="partially"><h3><i class="fa-solid fa-star"></i></h3></div>
+          <div id="good" class="btn" title="fully"><h3>
+            <i class="fa-solid fa-star"></i>
+            
+          </h3></div>
+        </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+<!-- end of card section -->
+
+
+
+
+
+    <!-- <div class="instruction">
+
+      <div>
+        <a class="btn bigbutt" id="loadset">Load new cards</a>
+       
+      </div>
+
+      <div class="spacer">
+      </div>
+
+      <div>
+        <a class="btn bigbutt" id="about">Need instructions?</a>
+
+        
+      </div>  -->
+
+      <!-- "load new set" dialog -->
+      <dialog id="loaddialog" class="dialog">
+        <!-- <div class="insidedialog"> -->
+        <form method='dialog'>
+          <!-- <p>
+        You are about to select a new set of flashcards.<br>
+        All progress on the current set will be lost.
+          </p> -->
+          <p><h2><label for="selectset">What would you like to study?</label></h2></p>
+          <p>
+            <select id="selectset">
+              <option></option>
+              <option>English county towns</option>
+              <option>CSS concepts</option>
+              <option>Javascript</option>
+            </select>
+        </p>
+          <menu>
+            <!-- <button id="confirmBtn" value="default">OK</button> -->
+
+            <!-- <button value="cancel">Cancel</button> -->
+<p>
+            <button id="confirmBtn" value="default" class="pushable primary">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span class="frontbtn">
+                OK
+              </span>
+            </button>
+</p>
+<p>
+            <button value="cancel" class="pushable">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span class="frontbtn">
+                Cancel
+              </span>
+            </button>
+
+          </menu>
+        </form>
+      <!-- </div> -->
+      <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
+      </dialog>
+</p>
+      <!-- "about" dialog -->
+      <dialog id="aboutdialog" class="dialog">
+
+        <form method='dialog'>
+
+          <p>
+            <b>How it works:</b>
+            <ul class="totheleft">
+              <li>Select a set of questions with the "Load new cards" button</li>
+              <li>Click the flashcard to flip to the answer side</li>
+              <li>Did you know the answer? Rate your knowledge: &checkmark; - perfect; <strong>?</strong> - partial; ✗ - none</li>
+              <li>The button you choose affects how often you'll see the same flashcard</li>
+              <li>3 ratings of "perfect" or 6 ratings of "partial" removes the card from rotation</li>
+            </ul>
+          </p>
+          <!-- <p>
+            This website is a learning project.<br>
+            This bare-bones idea needs more functionalities. <br>
+            Access this project on <a href="https://github.com/Star-Squid/Flipping-Flashcards">GitHub</a> if you'd like<br>to help me work on it.
+          </p> -->
+
+          <menu>
+            <button value="cancel">OK</button>
+          </menu>
+        </form>
+      </dialog>
+
+    <!-- </div>
+  </div> -->
+</div>
+
+</body>
+
+</html>

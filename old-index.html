@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Flipping Flashcards</title>
+  <link rel="icon" href="favicon.ico">
+
+  <!-- fonts and styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&family=Supermercado+One&display=swap" rel="stylesheet">
+  <link href="styles/styles.css" rel="stylesheet">
+
+  <!-- scripts -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
+  <script src="js/jquery.flip.min.js" charset="utf-8" defer></script>
+  <script src="js/q-and-a.js" charset="utf-8" defer></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="title">
+      <h1>Flipping<br>Flashcards</h1>
+    </div>
+
+    <!-- card section begins -->
+<div class="containcard">
+    <div class="flip" id="card">
+      <div class="front" id="question">
+        <h2>Do you want to study with these flipping flashcards?</h2>
+      </div>
+      <div class="back" id="answer">
+        <h3>Use the "Load new cards" button below to choose your subject</h3>
+        <h3> ↓ ↓ ↓ ↓ ↓ </h3>
+      </div>
+    </div>
+</div>
+<!-- end of card section -->
+
+
+    <div class="tickform disappear">
+      How did you do?
+      <br>
+      <button id="good" class="btn smallbutt">&checkmark;</button>
+      <button id="medium" class="btn smallbutt">?</button>
+      <button id="bad" class="btn smallbutt">✗</button>
+    </div>
+
+
+    <div class="instruction">
+
+      <div>
+        <a class="btn bigbutt" id="loadset">Load new cards</a>
+      </div>
+
+      <div class="spacer">
+      </div>
+
+      <div>
+        <a class="btn bigbutt" id="about">Need instructions?</a>
+      </div>
+
+      <!-- "load new set" dialog -->
+      <dialog id="loaddialog" class="dialog">
+        <form method='dialog'>
+          <p>
+        You are about to select a new set of flashcards.<br>
+        All progress on the current set will be lost.
+          </p>
+          <p><label>Select card set:
+            <select>
+              <option></option>
+              <option>English county towns</option>
+              <option>CSS concepts</option>
+              <option>Javascript</option>
+            </select>
+          </label></p>
+          <menu>
+            <button id="confirmBtn" value="default">OK</button>
+            <button value="cancel">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
+
+      <!-- "about" dialog -->
+      <dialog id="aboutdialog" class="dialog">
+
+        <form method='dialog'>
+
+          <p>
+            <b>How it works:</b>
+            <ul class="totheleft">
+              <li>Select a set of questions with the "Load new cards" button</li>
+              <li>Click the flashcard to flip to the answer side</li>
+              <li>Did you know the answer? Rate your knowledge: &checkmark; - perfect; <strong>?</strong> - partial; ✗ - none</li>
+              <li>The button you choose affects how often you'll see the same flashcard</li>
+              <li>3 ratings of "perfect" or 6 ratings of "partial" removes the card from rotation</li>
+            </ul>
+          </p>
+          <p>
+            This website is a learning project.<br>
+            This bare-bones idea needs more functionalities. <br>
+            Access this project on <a href="https://github.com/Star-Squid/Flipping-Flashcards">GitHub</a> if you'd like<br>to help me work on it.
+          </p>
+
+          <menu>
+            <button value="cancel">OK</button>
+          </menu>
+        </form>
+      </dialog>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
