@@ -22,6 +22,21 @@ aboutButton.addEventListener('click', function onOpen() {
     }
 });
 
+// display the "options" dialog
+
+const optionsButton = document.getElementById('options');
+const optionsDialog = document.getElementById('optionsdialog');
+const optionsBtn = document.getElementById('optionsBtn');
+
+optionsButton.addEventListener('click', function onOpen() {
+    if (typeof optionsDialog.showModal === "function") {
+        optionsDialog.showModal();
+    } else {
+        alert("The <dialog> API is not supported by this browser");
+    }
+});
+
+
 // create flashcard objects
 function cardFactory (question, answer){
     return {
@@ -112,8 +127,7 @@ let cardsJavascript = [
     javascript01, javascript02, javascript03, javascript04, javascript05, javascript06, javascript07
 ];
 
-//custom questions
-let custom01 = cardFactory("question", "answer");
+//Custom questions
 let cardsCustom = [];
 
 // flip the flashcard
@@ -226,6 +240,13 @@ selectEl.addEventListener('change', function onSelect(e) {
 // "OK" button triggers "close" on dialog because of [method="dialog"]
 loadDialog.addEventListener('close', function onClose() {
 
+
+//if a custom file was selected, it is turned into currentArray, else one of the dropdown options does
+
+
+if (csvFile.files[0]){
+    currentArray = JSON.parse(JSON.stringify(cardsCustom))
+} else {
     // copy the chosen array into currentArray through JSON to retain nested structure
     switch (loadDialog.returnValue){
         case "English county towns" : currentArray = JSON.parse(JSON.stringify(cardsCounty));
@@ -234,26 +255,28 @@ loadDialog.addEventListener('close', function onClose() {
         break;
         case "Javascript" : currentArray = JSON.parse(JSON.stringify(cardsJavascript));
         break;
-
     };
-
-    //update status menu
-    if (currentArray){statusCurrCardTotal = currentArray.length};
-    if (loadDialog.returnValue !== 'cancel'){
-    statusName.innerHTML = loadDialog.returnValue};
-    statusAvgRating.innerHTML = ' ';
-    statusCurrCard.innerHTML = ' '
-    statusCardRating.innerHTML = ' ';
+}
+    //update different elementd of the status menu
+    if (currentArray){
+        statusCurrCardTotal = currentArray.length
+        };
+    if (loadDialog.returnValue !== ('cancel' || 'default')){
+        statusName.innerHTML = loadDialog.returnValue
+        };
+    // statusAvgRating.innerHTML = ' ';
+    // statusCurrCard.innerHTML = ' ';
+    // statusCardRating.innerHTML = ' ';
 
 
     //show the card
     makeAppear(containcard);
 
-    // serve the first card
+    // serve the first flashcard
     nextCard(currentArray);
 
+
     // enable appearance and disappearance of rating buttons
-    // $(".tickform").addClass("live-buttons");
     $(".card-menu").removeClass("disappear");
 
 });
@@ -477,8 +500,13 @@ uploadForm.addEventListener("submit", function (e) {
 
   reader.onload = function (e) {
     const text = e.target.result;
-    const data = csvToArray(text);
-    document.write(JSON.stringify(data));
+    // const data = csvToArray(text);
+    csvToArray(text)
+
+    //--this will be done on load dialog
+    // currentArray = JSON.parse(JSON.stringify(cardsCustom))
+    // confirmBtn.value = cardsCustom;
+    // document.write(JSON.stringify(data));
   };
   
   reader.readAsText(input);

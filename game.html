@@ -151,6 +151,8 @@
       <!-- "load new set" dialog -->
       <dialog id="loaddialog" class="dialog">
         <!-- <div class="insidedialog"> -->
+
+
         <form method='dialog'>
           <!-- <p>
         You are about to select a new set of flashcards.<br>
@@ -166,10 +168,7 @@
             </select>
         </p>
           <menu>
-            <!-- <button id="confirmBtn" value="default">OK</button> -->
-
-            <!-- <button value="cancel">Cancel</button> -->
-<p>
+        <p>
             <button id="confirmBtn" value="default" class="pushable primary">
               <span role="presentation" class="shadow"></span>
               <span role="presentation" class="edge"></span>
@@ -177,8 +176,8 @@
                 OK
               </span>
             </button>
-</p>
-<p>
+          </p>
+          <p>
             <button value="cancel" class="pushable">
               <span role="presentation" class="shadow"></span>
               <span role="presentation" class="edge"></span>
@@ -186,7 +185,7 @@
                 Cancel
               </span>
             </button>
-
+          </p>
           </menu>
         </form>
       <!-- </div> -->
@@ -205,7 +204,7 @@
 
       <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
       </dialog>
-</p>
+
       <!-- "about" dialog -->
       <dialog id="aboutdialog" class="dialog">
 
@@ -215,23 +214,61 @@
             <strong>How it works:</strong>
           </p>
             <p>
-              Select a set of questions with the "Load new cards" button
+              Select a set of questions from the drop-down menu or upload a custom csv file (<a href="example-uk.csv">example</a>)
             </p>
-              Click the flashcard to flip to the answer side</p>
-              <p>Did you know the answer? Rate your knowledge: ☆ - none; ☆☆ - partial; ☆☆☆ - perfect</p>
-              <p>The button you choose affects how often you'll see the same flashcard</p>
-              <p>3 ratings of "perfect" or 6 ratings of "partial" removes the card from rotation in the session</p>
-            </p>
+              Click the flashcard to flip to the answer side and see the answer</p>
+              <p>Did you know the answer? Using the stars at the bottom, rate your knowledge: ☆ - none; ☆☆ - partial; ☆☆☆ - perfect</p>
+              <p>The rating you select affects how often you'll see the same flashcard</p>
+              <p>3 ratings of "perfect" (3 stars) or 6 ratings of "partial" removes the card from rotation in the current session</p>
+            <p>Change the flashcard set at any time by clicking the <i class="fa-solid fa-refresh"></i>refresh button</p>
           
           <!-- <p>
             This website is a learning project.<br>
             This bare-bones idea needs more functionalities. <br>
             Access this project on <a href="https://github.com/Star-Squid/Flipping-Flashcards">GitHub</a> if you'd like<br>to help me work on it.
           </p> -->
-
           <menu>
-            <button value="cancel">OK</button>
-          </menu>
+            <button value="cancel" class="pushable small">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span class="frontbtn">
+                OK
+              </span>
+            </button>          </menu>
+        </form>
+      </dialog>
+
+
+      <!-- options dialog -->
+      <dialog id="optionsdialog" class="dialog">
+
+        <form method='dialog'>
+
+          <p>
+            <strong>Colour options:</strong>
+          </p>
+            <p>
+              galaxy</p>
+              <p>neon</p>
+                        <p>
+                <strong>Keyboard shortcuts:</strong>
+              </p>
+                <p>
+                  there will be some</p>
+          
+          <!-- <p>
+            This website is a learning project.<br>
+            This bare-bones idea needs more functionalities. <br>
+            Access this project on <a href="https://github.com/Star-Squid/Flipping-Flashcards">GitHub</a> if you'd like<br>to help me work on it.
+          </p> -->
+          <menu>
+            <button value="cancel" class="pushable small">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span class="frontbtn">
+                OK
+              </span>
+            </button>          </menu>
         </form>
       </dialog>
 

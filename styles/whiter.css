@@ -97,6 +97,17 @@ h3 {
   
 }
 
+a{
+color: var(--white);
+}
+
+a:hover
+{
+  color: var(--peach);
+  text-shadow: -1px 0 var(--peach), 0 1px var(--peach), 1px 0 var(--peach), 0 -1px var(--peach), 5px 3px 4px var(--dark);
+  /* background-color: rgb(153, 83, 188) */
+}
+
 select{
   font-size: 3vmin;
   margin: 0;
@@ -325,6 +336,25 @@ menu {
   background: var(--medium);
 }
 
+/* .small {
+  font-size: 1rem;
+  font-family: 'Supermercado One', cursive;
+  color: var(--white);
+  background: var(--medium);
+} */
+.small .frontbtn {
+  display: block;
+  position: relative;
+  padding: 6px 20px;
+  border-radius: 20px;
+  border: solid 2px var(--white);
+
+  font-size: 1rem;
+  font-family: 'Supermercado One', cursive;
+  color: var(--white);
+
+}
+
 
 /* FLASHCARD */
 #containcard{
@@ -434,16 +464,16 @@ menu {
   /* background-color: rgb(153, 83, 188) */
 }
 
-.btn:active {
+/* .btn:active { */
   /* background-color: #FF8276;
   color: #fff;
   box-shadow: 2px 3px #683CF1;
   transform: translateY(4px); */
-}
+/* } */
 
-.smallbutt{
+/* .smallbutt{ */
   /* font-size: 2rem; */
-}
+/* } */
 
 .tickform > span:before {
   content:'☆';
@@ -519,13 +549,13 @@ dialog button:hover {
   cursor: pointer;
 } */
 
-#aboutdialog p{
+/* #aboutdialog>div{
   text-align: left;
 }
 
 #aboutdialog menu{
   text-align: center;
-}
+} */
 
 /* DROPDOWN */
 
