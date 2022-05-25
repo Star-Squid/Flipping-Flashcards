@@ -559,6 +559,8 @@ dialog button:hover {
 
 /* DROPDOWN */
 
+
+
 @media (max-width: 700px) {
   .back {
  font-size: 3vmin;

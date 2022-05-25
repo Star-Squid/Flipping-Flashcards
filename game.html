@@ -153,7 +153,7 @@
         <!-- <div class="insidedialog"> -->
 
 
-        <form method='dialog'>
+        <form id="upload-form" method='dialog'>
           <!-- <p>
         You are about to select a new set of flashcards.<br>
         All progress on the current set will be lost.
@@ -167,6 +167,7 @@
               <option>Javascript</option>
             </select>
         </p>
+
           <menu>
         <p>
             <button id="confirmBtn" value="default" class="pushable primary">
@@ -187,22 +188,33 @@
             </button>
           </p>
           </menu>
+
+          <p>
+            <input type="file" class="custom-file-input" id="csvFile" accept=".csv"/>
+            <!-- <input type="file" id="csvFile" accept=".csv" onChange="$(this).closest('form').submit()"/> -->
+            <!-- onchange="form.submit()" -->
+            <br />
+            </p>
+
+
+      <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
+
+
         </form>
       <!-- </div> -->
 
 
-      <form id="upload-form">
-        <input type="file" id="csvFile" accept=".csv"/>
+      <!-- <form id="upload-form">
+        <input type="file" id="csvFile" accept=".csv"/> -->
         <!-- <input type="file" id="csvFile" accept=".csv" onChange="$(this).closest('form').submit()"/> -->
         <!-- onchange="form.submit()" -->
-        <br />
+        <!-- <br />
         <input type="submit" value="Submit" />
-      </form>
+      </form> -->
 
 
 
 
-      <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
       </dialog>
 
       <!-- "about" dialog -->
@@ -214,14 +226,15 @@
             <strong>How it works:</strong>
           </p>
             <p>
-              Select a set of questions from the drop-down menu or upload a custom csv file (<a href="example-uk.csv">example</a>)
+              Select a set of questions from the drop-down menu or upload a custom csv file (<a href="example-uk.csv">for example this one</a>)
             </p>
-              Click the flashcard to flip to the answer side and see the answer</p>
+              Click the flashcard to flip to the answer side</p>
               <p>Did you know the answer? Using the stars at the bottom, rate your knowledge: ☆ - none; ☆☆ - partial; ☆☆☆ - perfect</p>
               <p>The rating you select affects how often you'll see the same flashcard</p>
               <p>3 ratings of "perfect" (3 stars) or 6 ratings of "partial" removes the card from rotation in the current session</p>
             <p>Change the flashcard set at any time by clicking the <i class="fa-solid fa-refresh"></i>refresh button</p>
-          
+            <p>created by <a href="https://star-squid.github.io/">Barbara Malta</a></p>
+
           <!-- <p>
             This website is a learning project.<br>
             This bare-bones idea needs more functionalities. <br>

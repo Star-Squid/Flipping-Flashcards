@@ -493,8 +493,10 @@ function csvToArray(str){
 
 }
 
+// confirmBtn
+
 uploadForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+//   e.preventDefault();
   const input = csvFile.files[0];
   const reader = new FileReader();
 
