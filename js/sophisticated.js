@@ -1,4 +1,14 @@
-// display the "about" dialog when the button is pressed
+//status menu displayed for the user
+let statusName = document.getElementById("status-name");
+let statusAvgRating = document.getElementById("status-avg-rating");
+let statusAvgRatingVal;
+let statusCurrCard = document.getElementById("status-curr-card");
+let statusCardRating = document.getElementById("status-card-rating");
+let statusCurrCardVal = 1;
+let statusCurrCardTotal = 15;
+
+
+// display the "help" dialog when the button is pressed
 
 const aboutButton = document.getElementById('about');
 const aboutDialog = document.getElementById('aboutdialog');
@@ -102,10 +112,9 @@ let cardsJavascript = [
     javascript01, javascript02, javascript03, javascript04, javascript05, javascript06, javascript07
 ];
 
-
-///////////////////////
-// DYNAMIC BEHAVIOUR //
-///////////////////////
+//custom questions
+let custom01 = cardFactory("question", "answer");
+let cardsCustom = [];
 
 // flip the flashcard
 $(function(){
@@ -147,6 +156,30 @@ const loadDialog = document.getElementById('loaddialog');
 const selectEl = document.querySelector('select');
 const confirmBtn = document.getElementById('confirmBtn');
 const containcard = document.getElementById('containcard');
+
+
+//create rating average
+function createAverage(arr){
+    let allRatings = 0;
+
+    // for (let i=0; i<currentArray.length; i++){
+    //     if (currentArray[i].question === tempArray[0].question){
+    //             currentArray[i].rating -=2;
+    //     }
+    // };
+
+
+    for (let i=0; i<arr.length; i++){
+        console.log(arr[i].rating);
+        allRatings = allRatings + arr[i].rating;
+    }
+    console.log(allRatings);
+
+    let avgRating = Math.floor(allRatings/arr.length);
+    console.log("avgRating: " + avgRating);
+    return avgRating;
+};
+
 
 
 // $("#loaddialog").dialog("widget")
@@ -203,6 +236,16 @@ loadDialog.addEventListener('close', function onClose() {
         break;
 
     };
+
+    //update status menu
+    if (currentArray){statusCurrCardTotal = currentArray.length};
+    if (loadDialog.returnValue !== 'cancel'){
+    statusName.innerHTML = loadDialog.returnValue};
+    statusAvgRating.innerHTML = ' ';
+    statusCurrCard.innerHTML = ' '
+    statusCardRating.innerHTML = ' ';
+
+
     //show the card
     makeAppear(containcard);
 
@@ -210,10 +253,31 @@ loadDialog.addEventListener('close', function onClose() {
     nextCard(currentArray);
 
     // enable appearance and disappearance of rating buttons
-    $(".tickform").addClass("live-buttons");
+    // $(".tickform").addClass("live-buttons");
+    $(".card-menu").removeClass("disappear");
+
 });
 
-//// rating buttons behaviour
+//tickform rating buttons behaviour
+// $("#good").hover(
+//     function() {
+//         $("#bad, #medium, #good").html( '<i class="fa-solid fa-star"></i>' )
+//     }, function() {
+//         $("#bad, #medium, #good").html( '<i class="fa-regular fa-star"></i>' )
+//     }
+//   );
+
+//   $("#medium").hover(
+//     function() {
+//         $("#bad, #medium").html( '<i class="fa-solid fa-star"></i>' )
+//     }, function() {
+//         $("#bad, #medium").html( '<i class="fa-regular fa-star"></i>' )
+//     }
+//   );
+
+
+// rating buttons behaviour
+
 $("#good").mousedown(function() {
 
     // find this tempArray card in currentArray and remove 2 rating points there
@@ -222,6 +286,7 @@ $("#good").mousedown(function() {
                 currentArray[i].rating -=2;
         }
     };
+
 
     // hide answer rating buttons for the next card
     // makeDisappear(".live-buttons");
@@ -251,56 +316,170 @@ $("#bad").mousedown(function() {
     nextCard(currentArray);
 });
 
-//// all "next card" behaviour
+// all "next card" behaviour
 function nextCard (array){
     // make sure the question side is displayed
-    $("#card").flip(false);
+    // $("#card").flip(false);
 
     // start without showing answer rating buttons, they appear on flip
     // makeDisappear(".live-buttons");
 
     // extract all ratings from the questions
     let arrayRatings = [];
-    for (let j=0; j<array.length; j++){
-        arrayRatings.push(array[j].rating)
-    }
 
+    if (currentArray){
+        for (let j=0; j<array.length; j++){
+            arrayRatings.push(array[j].rating)
+        }
+    };
     // clear out tempArray if needed
     tempArray.length = 0;
 
     // for every question in currentArray, push it to tempArray as many times as its rating shows
-    for (let k = 0; k<array.length; k++){
-        switch (arrayRatings[k]){
-            case 1 : tempArray.push(array[k]);
-              break;
-            case 2 : tempArray.push(array[k], array[k]);
-              break;
-            case 3 : tempArray.push(array[k], array[k], array[k]);
-              break;
-            case 4 : tempArray.push(array[k], array[k], array[k], array[k]);
-              break;
-            case 5 : tempArray.push(array[k], array[k], array[k], array[k], array[k]);
-              break;
-          };
 
-        console.log("current: " + currentArray.length);
-        console.log("temp: " + tempArray.length);
-        console.log("ratings:" + arrayRatings);
+    if (currentArray){
+        for (let k = 0; k<array.length; k++){
+            switch (arrayRatings[k]){
+                case 1 : tempArray.push(array[k]);
+                break;
+                case 2 : tempArray.push(array[k], array[k]);
+                break;
+                case 3 : tempArray.push(array[k], array[k], array[k]);
+                break;
+                case 4 : tempArray.push(array[k], array[k], array[k], array[k]);
+                break;
+                case 5 : tempArray.push(array[k], array[k], array[k], array[k], array[k]);
+                break;
+            };
+    };
+        // console.log("current: " + currentArray.length);
+        // console.log("temp: " + tempArray.length);
+        // console.log("ratings:" + arrayRatings);
     }
 
     // shuffle tempArray so you can always serve the first card from it (using a variable as array position doesn't seem to work)
     shuffleArray(tempArray);
 
+    // find this tempArray card in currentArray, save the card index (counting from 1), update status menu
+    if (currentArray){
+
+    for (let i=0; i<currentArray.length; i++){
+        if (currentArray[i].question === tempArray[0].question){
+                statusCurrCardVal = i + 1;
+                statusCurrCard.innerHTML = 'current card <strong>' + statusCurrCardVal + '/' + statusCurrCardTotal + '</strong>';
+
+                switch (currentArray[i].rating){
+                    case 5 : statusCardRating.innerHTML = 'card rating ☆☆☆';
+                      break;
+                    case 4 : statusCardRating.innerHTML = 'card rating ★☆☆';
+                      break;
+                    case 3 : statusCardRating.innerHTML = 'card rating ★★☆';
+                      break;
+                    case 2 : statusCardRating.innerHTML = 'card rating ★★☆';
+                    break;
+                    case 1 : statusCardRating.innerHTML = 'card rating ★★★';
+                    break;
+                    case 0 : statusCardRating.innerHTML = 'card rating ★★★';
+                    break;
+                  };
+
+                // let x = currentArray[i].question.rating;
+                // statusCardRating.innerHTML = x;
+        }
+
+        statusAvgRatingVal = createAverage(currentArray);
+
+        switch (currentArray[i].rating){
+            case 5 : statusAvgRating.innerHTML = 'avg rating ☆☆☆';
+              break;
+            case 4 : statusAvgRating.innerHTML = 'avg rating ★☆☆';
+              break;
+            case 3 : statusAvgRating.innerHTML = 'avg rating ★★☆';
+              break;
+            case 2 : statusAvgRating.innerHTML = 'avg rating ★★☆';
+            break;
+            case 1 : statusAvgRating.innerHTML = 'avg rating ★★★';
+            break;
+            case 0 : statusAvgRating.innerHTML = 'avg rating ★★★';
+            break;
+          };
+        };
+    };
+    
     // check if there is anything left in the array and display message or next card
     // 0.5s delay so there's no chance to peek the answer before the card flips back
     setTimeout(function() {
         if (tempArray.length <= 0){    
-            $("#question").text("🎉🎉 Finished! There are no more questions left in this set. 🎉🎉");
-            $("#answer").text("You can use a different set now - or load this one again, I'm not telling you what to do");
-            $(".tickform").removeClass("live-buttons");
+            $("#question").html("✧･ﾟ:*✧ﾟ Finished! ﾟ✧*:･ﾟ✧ <br>There are no more questions left in this set.");
+            $("#answer").text("You can use a different set now - or load the same one again");
+            $(".card-menu").addClass("disappear");
         } else {
             $("#question").text(tempArray[0].question);
             $("#answer").text(tempArray[0].answer);
         };
     }, 500);
 };
+
+
+//Upload button
+
+const uploadForm = document.getElementById("upload-form");
+const csvFile = document.getElementById("csvFile");
+
+function csvToArray_Old(str, delimiter = ",") {
+
+  // slice from start of text to the first \n index
+  // use split to create an array from string by delimiter
+   const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
+
+  // slice from \n index + 1 to the end of the text
+  // use split to create an array of each csv value row
+  const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+  console.log(rows)
+
+  // Map the rows
+  // split values from each row into an array
+  // use headers.reduce to create an object
+  // object properties derived from headers:values
+  // the object passed as an element of the array
+  const arr = rows.map(function (row) {
+    const values = row.split(delimiter);
+    const el = headers.reduce(function (object, header, index) {
+      object[header] = values[index];
+      return object;
+    }, {});
+    return el;
+  });
+
+  // return the array
+  return arr;
+}
+
+function csvToArray(str){
+      // slice from \n index + 1 to the end of the text
+  // use split to create an array of each csv value row
+  const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+  console.log(rows[3]);
+
+  for (let i = 0; i<rows.length; i++){
+      let q = rows[i].split(",")[0];
+      let a = rows[i].split(",")[1];
+      cardsCustom.push(cardFactory(q, a));
+      console.log(cardsCustom);  
+  }
+
+}
+
+uploadForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const input = csvFile.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const text = e.target.result;
+    const data = csvToArray(text);
+    document.write(JSON.stringify(data));
+  };
+  
+  reader.readAsText(input);
+});

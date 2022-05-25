@@ -74,13 +74,8 @@ html {
   overflow: auto;
 } */
 
-.tickform {
-  height: 15vh;
-  padding: 0;
-  font-size: 1.2rem;
-  font-weight: bolder;
-}
 
+/* 
 .instruction {
   background-image: repeating-linear-gradient(0deg, rgba(158, 169, 240, 0) 0px, rgba(111, 121, 200, 0.8) 9px, rgba(158, 169, 240, 1) 16px, rgba(111, 121, 200, 0.8) 23px, rgba(158, 169, 240, 0) 32px);
   padding-top: 20px;
@@ -93,7 +88,7 @@ html {
 
 .instruction .btn{
   font-style: oblique;
-}
+} */
 
 /* dialog {
   background: rgb(255, 232, 212);
@@ -122,53 +117,20 @@ dialog button:hover {
   background-color: rgb(153, 83, 188);
   color:  rgb(255, 232, 212);
   cursor: pointer;
-} */
-
-.totheleft{
-  text-align: left;
-}
-
-.btn {
-  margin: 5px;
-  text-align: center;
-  color: #000;
-  background-color: rgb(255, 232, 212);
-  border: 1px outset rgb(255, 232, 212);
-  border-radius: 20px;
-  box-shadow: 2px 5px #606EE8;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.btn:hover{
-  background-color: rgb(153, 83, 188)
-}
-
-.btn:active {
-  background-color: #FF8276;
-  color: #fff;
-  box-shadow: 2px 3px #683CF1;
-  transform: translateY(4px);
-}
-
-.smallbutt{
-  font-size: 2rem;
-}
+} 
 
 .bigbutt{
   font-size: 1rem;
   padding: 5px 10px 5px 10px;
   margin: 40px;
   position: relative;
+}*/
+
+.totheleft{
+  text-align: left;
 }
 
-.spacer{
-  height: 40px;
-}
 
-.disappear{
-  visibility: hidden;
-}
 
 @media (max-width: 700px) {
      body {

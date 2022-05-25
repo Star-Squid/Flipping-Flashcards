@@ -57,26 +57,22 @@
           <h3>Flipping<br>Flashcards</h3>
       </div>
       <div class="info-section">
-        <p>
-          <strong>Title of the set</strong>
+        <strong>
+          <p id="status-name">
+
+          </p>
+        </strong>
+        <!-- <hr> -->
+        <p id="status-avg-rating">
+          
         </p>
         <hr>
-        <p>
-          avg rating 
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+        <p id="status-curr-card">
+
         </p>
-        <hr>
-        <p>
-          current card <strong>3/15</strong>
-        </p>
-        <hr>
-        <p>
-          card rating 
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+        <!-- <hr> -->
+        <p id="status-card-rating">
+
         </p>
       </div>
     </nav>
@@ -106,14 +102,25 @@
         <div class="card-menu">
           <div class="rating-question">did you know the answer?</div>
           <hr>
+        
           <div class="tickform">
-            <div id="bad" class="btn" title="no"><h3><i class="fa-solid fa-star"></i></h3></div>
-            <div id="medium" class="btn" title="partially"><h3><i class="fa-solid fa-star"></i></h3></div>
-          <div id="good" class="btn" title="fully"><h3>
-            <i class="fa-solid fa-star"></i>
+
+            <span id="bad" title="no"></span>
+            <span id="medium" title="partially"></span>
+            <span id="good" title="fully"></span>
             
-          </h3></div>
+            <!-- <div id="bad" class="btn" title="no">
+              <i class="fa-regular fa-star"></i>
+            </div>
+            <div id="medium" class="btn" title="partially">
+              <i class="fa-regular fa-star"></i>
+            </div>
+          <div id="good" class="btn" title="fully">
+            <i class="fa-regular fa-star"></i>
+            </div> -->
+          
         </div>
+        
         </div>
 
       </div>
@@ -183,6 +190,19 @@
           </menu>
         </form>
       <!-- </div> -->
+
+
+      <form id="upload-form">
+        <input type="file" id="csvFile" accept=".csv"/>
+        <!-- <input type="file" id="csvFile" accept=".csv" onChange="$(this).closest('form').submit()"/> -->
+        <!-- onchange="form.submit()" -->
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+
+
+
+
       <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
       </dialog>
 </p>
@@ -192,15 +212,17 @@
         <form method='dialog'>
 
           <p>
-            <b>How it works:</b>
-            <ul class="totheleft">
-              <li>Select a set of questions with the "Load new cards" button</li>
-              <li>Click the flashcard to flip to the answer side</li>
-              <li>Did you know the answer? Rate your knowledge: &checkmark; - perfect; <strong>?</strong> - partial; ✗ - none</li>
-              <li>The button you choose affects how often you'll see the same flashcard</li>
-              <li>3 ratings of "perfect" or 6 ratings of "partial" removes the card from rotation</li>
-            </ul>
+            <strong>How it works:</strong>
           </p>
+            <p>
+              Select a set of questions with the "Load new cards" button
+            </p>
+              Click the flashcard to flip to the answer side</p>
+              <p>Did you know the answer? Rate your knowledge: ☆ - none; ☆☆ - partial; ☆☆☆ - perfect</p>
+              <p>The button you choose affects how often you'll see the same flashcard</p>
+              <p>3 ratings of "perfect" or 6 ratings of "partial" removes the card from rotation in the session</p>
+            </p>
+          
           <!-- <p>
             This website is a learning project.<br>
             This bare-bones idea needs more functionalities. <br>

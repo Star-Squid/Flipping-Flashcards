@@ -342,6 +342,7 @@ menu {
   background: var(--medium);
   /* background: radial-gradient(circle, rgba(137, 147, 238, 1) 56%, rgba(153, 83, 188, 1) 100%); */
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
 
@@ -444,7 +445,19 @@ menu {
   /* font-size: 2rem; */
 }
 
+.tickform > span:before {
+  content:'☆';
+  cursor: pointer;
+  color: var(--almostwhite);
+  font-size: 2rem;
+}
+.tickform:hover > span:before {
+  color: var(--peach);
+}
 
+.tickform > span:hover ~ span:before {
+  color: var(--almostwhite);
+}
 
 .spacer{
   height: 40px;
@@ -452,6 +465,7 @@ menu {
 
 .disappear{
   visibility: hidden;
+  /* display: none; */
 }
 
 /* DIALOG */
@@ -471,6 +485,10 @@ dialog {
   animation: createBox .5s;
 
 
+}
+
+dialog::backdrop {
+  background-color: rgba(31, 40, 79, 0.8);
 }
 ​
 /* .insidedialog{
@@ -500,6 +518,14 @@ dialog button:hover {
   color:  rgb(255, 232, 212);
   cursor: pointer;
 } */
+
+#aboutdialog p{
+  text-align: left;
+}
+
+#aboutdialog menu{
+  text-align: center;
+}
 
 /* DROPDOWN */
 
