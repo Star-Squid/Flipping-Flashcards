@@ -9,7 +9,6 @@ let statusCurrCardTotal = 15;
 
 
 // display the "help" dialog when the button is pressed
-
 const aboutButton = document.getElementById('about');
 const aboutDialog = document.getElementById('aboutdialog');
 const aboutBtn = document.getElementById('aboutBtn');
@@ -57,7 +56,6 @@ let county07 = cardFactory("What is the county town of Lancashire?", "Lancaster"
 let county08 = cardFactory("What is the county town of West Yorkshire?", "Wakefield");
 let county09 = cardFactory("What is the county town of East Riding of Yorkshire?", "Beverley");
 let county10 = cardFactory("What is the county town of Cheshire?", "Chester");
-
 let county11 = cardFactory("What is the county town of Derbyshire?", "Derby");
 let county12 = cardFactory("What is the county town of South Yorkshire?", "Barnsley");
 let county13 = cardFactory("What is the county town of Lincolnshire?", "Lincoln");
@@ -68,7 +66,6 @@ let county17 = cardFactory("What is the county town of Staffordshire?", "Staffor
 let county18 = cardFactory("What is the county town of Shropshire?", "Shrewsbury");
 let county19 = cardFactory("What is the county town of West Midlands?", "Birmingham");
 let county20 = cardFactory("What is the county town of Worcestershire?", "Worcester");
-
 let county21 = cardFactory("What is the county town of Herefordshire?", "Hereford");
 let county22 = cardFactory("What is the county town of Somerset?", "Taunton");
 let county23 = cardFactory("What is the county town of Gloucestershire?", "Gloucester");
@@ -138,9 +135,9 @@ $(function(){
 });
 
 // make rating buttons appear when a live card is flipped
-$("#card").on('click',function(){
-    makeAppear(".live-buttons");
-  });
+// $("#card").on('click',function(){
+//     makeAppear(".live-buttons");
+//   });
 
 //turn things invisible when needed (rating buttons)
 function makeDisappear(item){
@@ -176,45 +173,19 @@ const containcard = document.getElementById('containcard');
 function createAverage(arr){
     let allRatings = 0;
 
-    // for (let i=0; i<currentArray.length; i++){
-    //     if (currentArray[i].question === tempArray[0].question){
-    //             currentArray[i].rating -=2;
-    //     }
-    // };
-
-
     for (let i=0; i<arr.length; i++){
-        console.log(arr[i].rating);
+        //console.log(arr[i].rating);
         allRatings = allRatings + arr[i].rating;
     }
-    console.log(allRatings);
+    //console.log(allRatings);
 
     let avgRating = Math.floor(allRatings/arr.length);
     console.log("avgRating: " + avgRating);
     return avgRating;
 };
 
-
-
-// $("#loaddialog").dialog("widget")
-//                 .next(".ui-widget-overlay")
-//                 .css("background", "#f00ba2");
-
-// $("div#loaddialog").dialog({
-//     title: "My Dialog Title",
-//     open: function (event, ui) {
-//         $(".ui-widget-overlay").css({
-//             opacity: 1.0,
-//             filter: "Alpha(Opacity=100)",
-//             backgroundColor: "black"
-//         });
-//     },
-//     modal: true
-// });
-
 //open dialog immediately
 $(document).ready(function() {
-    // function onOpen() {
     if (typeof loadDialog.showModal === "function") {
         loadDialog.showModal();
       } else {
@@ -232,7 +203,7 @@ loadButton.addEventListener('click', function onOpen() {
   }
 });
 
-// input sets the value of the submit button
+// 'select' input sets the value of the submit button
 selectEl.addEventListener('change', function onSelect(e) {
   confirmBtn.value = selectEl.value;
 });
@@ -240,10 +211,7 @@ selectEl.addEventListener('change', function onSelect(e) {
 // "OK" button triggers "close" on dialog because of [method="dialog"]
 loadDialog.addEventListener('close', function onClose() {
 
-
 //if a custom file was selected, it is turned into currentArray, else one of the dropdown options does
-
-
 if (csvFile.files[0]){
     currentArray = JSON.parse(JSON.stringify(cardsCustom))
 } else {
@@ -277,30 +245,12 @@ if (csvFile.files[0]){
 
 
     // enable appearance and disappearance of rating buttons
-    $(".card-menu").removeClass("disappear");
+    //$(".card-menu").removeClass("disappear");
 
 });
 
-//tickform rating buttons behaviour
-// $("#good").hover(
-//     function() {
-//         $("#bad, #medium, #good").html( '<i class="fa-solid fa-star"></i>' )
-//     }, function() {
-//         $("#bad, #medium, #good").html( '<i class="fa-regular fa-star"></i>' )
-//     }
-//   );
-
-//   $("#medium").hover(
-//     function() {
-//         $("#bad, #medium").html( '<i class="fa-solid fa-star"></i>' )
-//     }, function() {
-//         $("#bad, #medium").html( '<i class="fa-regular fa-star"></i>' )
-//     }
-//   );
-
 
 // rating buttons behaviour
-
 $("#good").mousedown(function() {
 
     // find this tempArray card in currentArray and remove 2 rating points there
@@ -443,11 +393,10 @@ function nextCard (array){
     }, 500);
 };
 
-
 //Upload button
-
 const uploadForm = document.getElementById("upload-form");
 const csvFile = document.getElementById("csvFile");
+let fileName = document.getElementById("file-name");
 
 function csvToArray_Old(str, delimiter = ",") {
 
@@ -474,31 +423,40 @@ function csvToArray_Old(str, delimiter = ",") {
     return el;
   });
 
-  // return the array
   return arr;
 }
 
 function csvToArray(str){
-      // slice from \n index + 1 to the end of the text
-  // use split to create an array of each csv value row
+    // slice from \n index + 1 to the end of the text
+    // use split to create an array of each csv value row
   const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-  console.log(rows[3]);
 
   for (let i = 0; i<rows.length; i++){
       let q = rows[i].split(",")[0];
       let a = rows[i].split(",")[1];
       cardsCustom.push(cardFactory(q, a));
-      console.log(cardsCustom);  
   }
 
 }
 
-// confirmBtn
+// when file is selected
+csvFile.addEventListener('change', ()=>{
+    //display file name
+    let newFile = document.querySelector("input[type=file]").files[0];
+    fileName.innerText = newFile.name;
+    
 
-uploadForm.addEventListener("submit", function (e) {
-//   e.preventDefault();
+    //convert file into array of cards
+
+    //make this array customArray
+
+})
+
+// when the form is submitted with confirmBtn
+uploadForm.addEventListener("submit", function () {
   const input = csvFile.files[0];
   const reader = new FileReader();
+
 
   reader.onload = function (e) {
     const text = e.target.result;
@@ -507,9 +465,12 @@ uploadForm.addEventListener("submit", function (e) {
 
     //--this will be done on load dialog
     // currentArray = JSON.parse(JSON.stringify(cardsCustom))
-    // confirmBtn.value = cardsCustom;
+    //confirmBtn.value = cardsCustom;
     // document.write(JSON.stringify(data));
   };
-  
+
   reader.readAsText(input);
+
+  //make sure the card displays the question side
+  $("#card").flip(false)
 });

@@ -5,17 +5,17 @@
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="A flashcard game that supercharges studying"
+      content="Flipping Flashcards is a game that supercharges studying"
     />
     <meta name="author" content="Barbara Malta" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flipping Flashcards session</title>
 
     <!-- favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
 
     <!-- styles, fonts -->
     <link rel="preload" href="img/galaxy-neon.png" as="image">
@@ -189,16 +189,18 @@
             </button>
           </p>
           </menu>
-
-          <p>
-            <input type="file" class="custom-file-input" id="csvFile" accept=".csv"/>
+          <label for="csvFile"><h2 class="functional" title="Upload your own .csv or .json"><i class="fa-solid fa-upload"></i></h2></label>
+         
+            <input type="file" id="csvFile" name="csvFile" accept=".csv">
+            
+            <!-- onchange="form.submit()"> -->
+<span id="file-name"></span>
             <!-- <input type="file" id="csvFile" accept=".csv" onChange="$(this).closest('form').submit()"/> -->
             <!-- onchange="form.submit()" -->
-            <br />
-            </p>
+            
 
 
-      <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2>
+      <!-- <h2 class="functional" title="Upload your own"><i class="fa-solid fa-upload"></i></h2> -->
 
 
         </form>
@@ -209,7 +211,7 @@
         <input type="file" id="csvFile" accept=".csv"/> -->
         <!-- <input type="file" id="csvFile" accept=".csv" onChange="$(this).closest('form').submit()"/> -->
         <!-- onchange="form.submit()" -->
-        <!-- <br />
+        <!-- <br>
         <input type="submit" value="Submit" />
       </form> -->
 
@@ -227,13 +229,44 @@
             <strong>How it works:</strong>
           </p>
             <p>
-              Select a set of questions from the drop-down menu or upload a custom csv file (<a href="example-uk.csv">for example this one</a>)
+              Select a set of questions from the drop-down menu or upload a custom .csv file (<a href="example-uk.csv">for example this one</a>), or .json file (<a href="example-uk.json">here</a>)
+
             </p>
+            <p>
               Click the flashcard to flip to the answer side</p>
               <p>Did you know the answer? Using the stars at the bottom, rate your knowledge: ☆ - none; ☆☆ - partial; ☆☆☆ - perfect</p>
               <p>The rating you select affects how often you'll see the same flashcard</p>
               <p>3 ratings of "perfect" (3 stars) or 6 ratings of "partial" removes the card from rotation in the current session</p>
             <p>Change the flashcard set at any time by clicking the <i class="fa-solid fa-refresh"></i>refresh button</p>
+            <p>
+              <br>
+              <strong>Keyboard shortcuts:</strong>
+            </p>
+              
+            <div class="twocolumns">
+              <div class="column-left">
+                <p><strong>backspace</strong></p>
+                <p><strong>R</strong></p>
+                <p><strong>Q</strong></p>
+                <p><strong>O</strong></p>
+                <p><strong>space</strong></p>
+                <p><strong>← / A</strong></p>
+                <p><strong>↓ / S</strong></p>
+                <p><strong>→ / D</strong></p>
+              </div>
+              <div class="column-right">
+                <p>back to home screen</p>
+                <p>refresh</p>
+                <p>question/about</p>
+                <p>options</p>
+                <p>flip card</p>
+                <p>rate 1 star</p>
+                <p>rate 2 stars</p>
+                <p>rate 3 stars</p>
+              </div>
+            </div>
+
+            <br>
             <p>created by <a href="https://star-squid.github.io/">Barbara Malta</a></p>
 
           <!-- <p>
@@ -265,10 +298,14 @@
               galaxy</p>
               <p>neon</p>
                         <p>
-                <strong>Keyboard shortcuts:</strong>
+                <strong>Difficulty:</strong>
               </p>
                 <p>
                   there will be some</p>
+                  <strong>Keyboard shortcuts:</strong>
+                </p>
+                  <p>
+                    there will be some</p>
           
           <!-- <p>
             This website is a learning project.<br>

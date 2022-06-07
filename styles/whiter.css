@@ -49,13 +49,17 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
-
   font-family: 'Nunito', sans-serif;
   color: var(--white);
   font-size: 2vmin;
   width: 100vw;
   height: 100vh;
+
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--dark) var(--lightgrey);
+  overflow-x: hidden; */
 }
+
 
 body:after{
   display:none;
@@ -214,7 +218,7 @@ menu {
   left:0;
   top:0;
   width: 100%;
-  height: 100%;
+  height: 110%;
 
 	display: flex;
 	flex-direction: column;
@@ -514,13 +518,28 @@ dialog {
   width: 80%; */
   animation: createBox .5s;
 
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--dark) var(--lightgrey); */
 
 }
 
 dialog::backdrop {
   background-color: rgba(31, 40, 79, 0.8);
 }
-​
+
+.container #aboutdialog :not(:last-child){
+  text-align: left;
+}
+
+.twocolumns{
+  width: 100%;
+  display: grid;
+  /* flex-flow: row wrap; */
+  grid-template-columns: 1fr 6fr;
+}
+/* .column-left strong{
+  text-align: right;
+} */
 /* .insidedialog{
   width: 100%;
   height:100%;
@@ -557,8 +576,9 @@ dialog button:hover {
   text-align: center;
 } */
 
-/* DROPDOWN */
-
+input[type="file" i] {
+display: none;
+}
 
 
 @media (max-width: 700px) {
