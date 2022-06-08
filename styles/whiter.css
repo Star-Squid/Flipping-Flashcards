@@ -8,13 +8,26 @@ html {
   box-sizing: inherit;
 }
 
-:root {
-  /* --smallgap: 1vw;
-  --normalgap: 2vw;
-  --biggap: 5vw;
-  --doublegap: 7vw;
-  --vminwhenbig: 10.5px; */
+:root.neon {
+  --background: url("../img/neon.jpg");
 
+  --transparent: rgba(1, 1, 1, 0);
+  --white: rgb(249, 235, 222);  
+  --almostwhite: #f5cbab;
+  --lightgrey: #7F3BC3; 
+  --grey: #7F3BC3;
+
+  --pink: #FBB279;
+  --peach: #DC23C8;
+  --violet: #7F3BC3;
+
+  --dark: rgba(104, 60, 241, 1);
+  --halfdark: rgba(49, 9, 170, 0.4);
+  --medium: rgb(55, 40, 169);
+  --halfmedium: rgba(93,106,220, 0.8);
+}
+
+:root {
   --background: url("../img/galaxy-neon.png");
 
   --transparent: rgba(1, 1, 1, 0);

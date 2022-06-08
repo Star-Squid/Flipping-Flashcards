@@ -206,6 +206,7 @@ loadButton.addEventListener('click', function onOpen() {
 // 'select' input sets the value of the submit button
 selectEl.addEventListener('change', function onSelect(e) {
   confirmBtn.value = selectEl.value;
+  //or custon array?
 });
 
 // "OK" button triggers "close" on dialog because of [method="dialog"]
@@ -239,6 +240,9 @@ if (csvFile.files[0]){
 
     //show the card
     makeAppear(containcard);
+
+    //show rating
+    $(".card-menu").removeClass("disappear");
 
     // serve the first flashcard
     nextCard(currentArray);
@@ -543,3 +547,9 @@ $(document).keydown(function(e){
         nextCard(currentArray);
     }
 });
+
+//change themes
+function setTheme (theme) {document.documentElement.className = theme};
+
+//ensure that 'egg' is the default theme
+setTheme('galaxy');
