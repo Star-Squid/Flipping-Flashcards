@@ -277,26 +277,16 @@ $("#medium").mousedown(function() {
         }
     };
 
-    // hide answer rating buttons for the next card
-    // makeDisappear(".live-buttons");
-
     // serve a new card
     nextCard(currentArray);
 });
 
 $("#bad").mousedown(function() {
-    // makeDisappear(".live-buttons");
     nextCard(currentArray);
 });
 
 // all "next card" behaviour
 function nextCard (array){
-    // make sure the question side is displayed
-    // $("#card").flip(false);
-
-    // start without showing answer rating buttons, they appear on flip
-    // makeDisappear(".live-buttons");
-
     // extract all ratings from the questions
     let arrayRatings = [];
 
@@ -325,10 +315,7 @@ function nextCard (array){
                 break;
             };
     };
-        // console.log("current: " + currentArray.length);
-        // console.log("temp: " + tempArray.length);
-        // console.log("ratings:" + arrayRatings);
-    }
+}
 
     // shuffle tempArray so you can always serve the first card from it (using a variable as array position doesn't seem to work)
     shuffleArray(tempArray);
@@ -355,9 +342,6 @@ function nextCard (array){
                     case 0 : statusCardRating.innerHTML = 'card rating ★★★';
                     break;
                   };
-
-                // let x = currentArray[i].question.rating;
-                // statusCardRating.innerHTML = x;
         }
 
         statusAvgRatingVal = createAverage(currentArray);
@@ -390,7 +374,7 @@ function nextCard (array){
             $("#question").text(tempArray[0].question);
             $("#answer").text(tempArray[0].answer);
         };
-    }, 500);
+    }, 200);
 };
 
 //Upload button
@@ -503,20 +487,59 @@ $(document).keydown(function(e){
     //space
     if (e.which == 32){    
         document.getElementById("card").click();
-    }
+        //$("#card").flip()
+    } 
 
     //a/left
-    if (e.which == 65 ||  e.which == 37) {    
-        document.getElementById("bad").click();
+    if (e.which == 65) {    
+        for (let i=0; i<currentArray.length; i++){
+            if (currentArray[i].question === tempArray[0].question){
+                    currentArray[i].rating -= 2;
+            }
+        };
+
+        $("#card").flip(false);
+        nextCard(currentArray); 
+
+    } else if (e.which == 37){
+        for (let i=0; i<currentArray.length; i++){
+            if (currentArray[i].question === tempArray[0].question){
+                    currentArray[i].rating -= 2;
+            }
+        };
+
+        $("#card").flip(false);
+        nextCard(currentArray); 
     }
 
     //s/down
-    if (e.which == 83 ||  e.which == 40) {     
-        document.getElementById("medium").click();
+    if (e.which == 83) {     
+        for (let i=0; i<currentArray.length; i++){
+            if (currentArray[i].question === tempArray[0].question){
+                    currentArray[i].rating --;
+            }
+        };
+
+        $("#card").flip(false);
+        nextCard(currentArray); 
+
+    } else if (e.which == 40){
+        for (let i=0; i<currentArray.length; i++){
+            if (currentArray[i].question === tempArray[0].question){
+                    currentArray[i].rating --;
+            }
+        };
+
+        $("#card").flip(false);
+        nextCard(currentArray);
     }
 
     //d/right
-    if (e.which == 68 ||  e.which == 39) {     
-        document.getElementById("good").click();
+    if (e.which == 68) {     
+        $("#card").flip(false);
+        nextCard(currentArray);
+    } else if (e.which == 39){
+        $("#card").flip(false);
+        nextCard(currentArray);
     }
 });
