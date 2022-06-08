@@ -6,7 +6,7 @@ let statusCurrCard = document.getElementById("status-curr-card");
 let statusCardRating = document.getElementById("status-card-rating");
 let statusCurrCardVal = 1;
 let statusCurrCardTotal = 15;
-
+let statusDifficulty = document.getElementById("status-difficulty");
 
 // display the "help" dialog when the button is pressed
 const aboutButton = document.getElementById('about');
@@ -35,13 +35,31 @@ optionsButton.addEventListener('click', function onOpen() {
     }
 });
 
+//this changes with difficulty level
+var difficulty = 5
+
+function setDifficulty(x){
+    difficulty = x;
+    //console.log(x);
+    let message;
+
+        switch (x){
+            case 7: message = "difficulty - hard";
+            break;
+            case 5: message = "difficulty - medium";
+            break;
+            case 3: message = "difficulty - easy";
+            break;
+        }
+    statusDifficulty.innerText = message;
+}
 
 // create flashcard objects
 function cardFactory (question, answer){
     return {
         question: question,
         answer: answer,
-        rating: 5,
+        rating: difficulty,
     };
 };
 
@@ -180,7 +198,7 @@ function createAverage(arr){
     //console.log(allRatings);
 
     let avgRating = Math.floor(allRatings/arr.length);
-    console.log("avgRating: " + avgRating);
+    //console.log("avgRating: " + avgRating);
     return avgRating;
 };
 
@@ -395,7 +413,7 @@ function csvToArray_Old(str, delimiter = ",") {
   // slice from \n index + 1 to the end of the text
   // use split to create an array of each csv value row
   const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-  console.log(rows)
+  //console.log(rows)
 
   // Map the rows
   // split values from each row into an array
@@ -466,7 +484,7 @@ uploadForm.addEventListener("submit", function () {
 
 //KEYBOARD SHORTCUTS
 $(document).keydown(function(e){
-    console.log(e.which);
+    //console.log(e.which);
 
     //backspace
     if (e.which == 8){    

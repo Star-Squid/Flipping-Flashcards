@@ -67,7 +67,9 @@
         <p id="status-curr-card">
         </p>
         <p id="status-card-rating">
-
+          <hr>
+          <p id="status-difficulty">
+          </p>
         </p>
       </div>
     </nav>
@@ -226,11 +228,13 @@
                 <strong>Difficulty (requires refreshing the card set):</strong>
               </p>
               <div class="radio">
-                  <input type="radio" id="easy-diff" name="difficulty" value="easy-diff">
+                  <input type="radio" id="easy-diff" name="difficulty" value="easy-diff" onclick="setDifficulty(3)">
                   <label for="easy-diff">easy</label><br>
-                  <input type="radio" id="medium-diff" name="difficulty" value="medium-diff">
+                
+                  <input type="radio" id="medium-diff" name="difficulty" value="medium-diff" onclick="setDifficulty(5)">
                   <label for="medium-diff">medium</label><br>
-                  <input type="radio" id="hard-diff" name="difficulty" value="hard-diff">
+
+                  <input type="radio" id="hard-diff" name="difficulty" value="hard-diff" onclick="setDifficulty(7)">
                   <label for="hard-diff">hard</label>
                 </div> 
     
