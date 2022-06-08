@@ -474,3 +474,49 @@ uploadForm.addEventListener("submit", function () {
   //make sure the card displays the question side
   $("#card").flip(false)
 });
+
+
+//KEYBOARD SHORTCUTS
+$(document).keydown(function(e){
+    console.log(e.which);
+
+    //backspace
+    if (e.which == 8){    
+        document.getElementById("back").click();
+    }
+
+    //r
+    if (e.which == 82){    
+        document.getElementById("loadset").click();
+    }
+
+    //q
+    if (e.which == 81){    
+        document.getElementById("about").click();
+    }
+
+    //o
+    if (e.which == 79){    
+        document.getElementById("options").click();
+    }
+
+    //space
+    if (e.which == 32){    
+        document.getElementById("card").click();
+    }
+
+    //a/left
+    if (e.which == 65 ||  e.which == 37) {    
+        document.getElementById("bad").click();
+    }
+
+    //s/down
+    if (e.which == 83 ||  e.which == 40) {     
+        document.getElementById("medium").click();
+    }
+
+    //d/right
+    if (e.which == 68 ||  e.which == 39) {     
+        document.getElementById("good").click();
+    }
+});

@@ -593,3 +593,8 @@ display: none;
  margin: 0 auto;
 }
 }
+
+#optionsdialog{
+  min-width: 10rem;
+  text-align: left;
+}
