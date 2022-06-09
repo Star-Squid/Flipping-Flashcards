@@ -22,7 +22,6 @@ aboutButton.addEventListener('click', function onOpen() {
 });
 
 // display the "options" dialog
-
 const optionsButton = document.getElementById('options');
 const optionsDialog = document.getElementById('optionsdialog');
 const optionsBtn = document.getElementById('optionsBtn');
@@ -152,11 +151,6 @@ $(function(){
     });
 });
 
-// make rating buttons appear when a live card is flipped
-// $("#card").on('click',function(){
-//     makeAppear(".live-buttons");
-//   });
-
 //turn things invisible when needed (rating buttons)
 function makeDisappear(item){
     $(item).addClass("disappear");
@@ -185,7 +179,6 @@ const loadDialog = document.getElementById('loaddialog');
 const selectEl = document.querySelector('select');
 const confirmBtn = document.getElementById('confirmBtn');
 const containcard = document.getElementById('containcard');
-
 
 //create rating average
 function createAverage(arr){
@@ -224,9 +217,9 @@ loadButton.addEventListener('click', function onOpen() {
 // 'select' input sets the value of the submit button
 selectEl.addEventListener('change', function onSelect(e) {
   confirmBtn.value = selectEl.value;
-  //or custon array?
 });
 
+// when the load dialog is closed
 // "OK" button triggers "close" on dialog because of [method="dialog"]
 loadDialog.addEventListener('close', function onClose() {
 
@@ -250,13 +243,8 @@ if (customFile.files[0]){
         };
     if (loadDialog.returnValue !== ('cancel' || 'default')){
         statusName.innerHTML = loadDialog.returnValue
-        };
-    // statusAvgRating.innerHTML = ' ';
-    // statusCurrCard.innerHTML = ' ';
-    // statusCardRating.innerHTML = ' ';
+        };    
     
-    
-
     //show the card
     makeAppear(containcard);
 
@@ -265,13 +253,7 @@ if (customFile.files[0]){
 
     // serve the first flashcard
     nextCard(currentArray);
-
-
-    // enable appearance and disappearance of rating buttons
-    //$(".card-menu").removeClass("disappear");
-
 });
-
 
 // rating buttons behaviour
 $("#good").mousedown(function() {
@@ -282,10 +264,6 @@ $("#good").mousedown(function() {
                 currentArray[i].rating -=2;
         }
     };
-
-
-    // hide answer rating buttons for the next card
-    // makeDisappear(".live-buttons");
 
     // serve a new card
     nextCard(currentArray);
@@ -311,6 +289,8 @@ $("#bad").mousedown(function() {
 // all "next card" behaviour
 function nextCard (array){
     // extract all ratings from the questions
+    console.log(currentArray[2].rating)
+
     let arrayRatings = [];
 
     if (currentArray){
@@ -322,7 +302,6 @@ function nextCard (array){
     tempArray.length = 0;
 
     // for every question in currentArray, push it to tempArray as many times as its rating shows
-
     if (currentArray){
         for (let k = 0; k<array.length; k++){
             switch (arrayRatings[k]){
@@ -458,40 +437,14 @@ uploadForm.addEventListener("submit", function () {
         const text = e.target.result;
         csvToArray(text);
         }
+        currentArray = JSON.parse(JSON.stringify(cardsCustom))
+
     } else if (extension == "json") {
-
-        //console.log("hello")
-        // let json = JSON.stringify(input);
-        // const blob = new Blob([json], {type:"application/json"});
-
-        // console.log(blob)
-        // reader.onload = function (e) {
-        //     console.log(e.target.result, JSON.parse(reader.result))
-        //   };
-        // jsonToArray(text);
-        // reader.readAsText(blob);
-
-
-        // reader.onload = (function (input) {
-		// 	return function (e) {
-		// 		console.log('e readAsText = ', e);
-		// 		console.log('e readAsText target = ', e.target);
-		// 		try {
-		// 			json = JSON.parse(e.target.result);
-		// 			alert('json global var has been set to parsed json of this file here it is unevaled = \n' + JSON.stringify(json));
-		// 		} catch (ex) {
-		// 			alert('ex when trying to parse json = ' + ex);
-		// 		}
-		// 	}
-		// })(f);
-		// reader.readAsText(f);
-
         reader.onload = function (e) {
             const text = e.target.result;
             console.log(text)
             jsonToArray(text);
             }
-        // jsonToArray(text);
 
         //confirmBtn.value = selectEl.value
         currentArray = JSON.parse(JSON.stringify(cardsCustom))
@@ -591,6 +544,3 @@ $(document).keydown(function(e){
 
 //change themes
 function setTheme (theme) {document.documentElement.className = theme};
-
-//ensure that 'egg' is the default theme
-setTheme('galaxy');
