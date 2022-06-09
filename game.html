@@ -1,3 +1,15 @@
+<!--
+ _______ _ _             _                _______ _            _                         _      
+(_______) (_)           (_)              (_______) |          | |                       | |     
+ _____  | |_ ____  ____  _ ____   ____    _____  | | ____  ___| | _   ____ ____  ____ _ | | ___ 
+|  ___) | | |  _ \|  _ \| |  _ \ / _  |  |  ___) | |/ _  |/___) || \ / ___) _  |/ ___) || |/___)
+| |     | | | | | | | | | | | | ( ( | |  | |     | ( ( | |___ | | | ( (__( ( | | |  ( (_| |___ |
+|_|     |_|_| ||_/| ||_/|_|_| |_|\_|| |  |_|     |_|\_||_(___/|_| |_|\____)_||_|_|   \____(___/ 
+            |_|   |_|           (_____|                                                         
+:: created by Barbara Malta ::
+:: thanks for playing! ::
+:: barbara@mb-malta.co.uk::
+-->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -140,9 +152,9 @@
             </button>
           </p>
           </menu>
-          <label for="csvFile"><h2 class="functional" title="Upload your own .csv or .json"><i class="fa-solid fa-upload"></i></h2></label>
+          <label for="customFile"><h2 class="functional" title="Upload your own .csv or .json"><i class="fa-solid fa-upload"></i></h2></label>
          
-            <input type="file" id="csvFile" name="csvFile" accept=".csv">
+            <input type="file" id="customFile" name="customFile" accept=".csv, .json">
             
 <span id="file-name"></span>
             
@@ -230,7 +242,7 @@
               <div class="radio">
                   <input type="radio" id="easy-diff" name="difficulty" value="easy-diff" onclick="setDifficulty(3)">
                   <label for="easy-diff">easy</label><br>
-                
+
                   <input type="radio" id="medium-diff" name="difficulty" value="medium-diff" onclick="setDifficulty(5)">
                   <label for="medium-diff">medium</label><br>
 

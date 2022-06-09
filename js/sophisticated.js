@@ -231,7 +231,7 @@ selectEl.addEventListener('change', function onSelect(e) {
 loadDialog.addEventListener('close', function onClose() {
 
 //if a custom file was selected, it is turned into currentArray, else one of the dropdown options does
-if (csvFile.files[0]){
+if (customFile.files[0]){
     currentArray = JSON.parse(JSON.stringify(cardsCustom))
 } else {
     // copy the chosen array into currentArray through JSON to retain nested structure
@@ -254,7 +254,8 @@ if (csvFile.files[0]){
     // statusAvgRating.innerHTML = ' ';
     // statusCurrCard.innerHTML = ' ';
     // statusCardRating.innerHTML = ' ';
-
+    
+    
 
     //show the card
     makeAppear(containcard);
@@ -401,37 +402,27 @@ function nextCard (array){
 
 //Upload button
 const uploadForm = document.getElementById("upload-form");
-const csvFile = document.getElementById("csvFile");
+const customFile = document.getElementById("customFile");
 let fileName = document.getElementById("file-name");
 
-function csvToArray_Old(str, delimiter = ",") {
+//check extension
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+  }
 
-  // slice from start of text to the first \n index
-  // use split to create an array from string by delimiter
-   const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-
-  // slice from \n index + 1 to the end of the text
-  // use split to create an array of each csv value row
-  const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-  //console.log(rows)
-
-  // Map the rows
-  // split values from each row into an array
-  // use headers.reduce to create an object
-  // object properties derived from headers:values
-  // the object passed as an element of the array
-  const arr = rows.map(function (row) {
-    const values = row.split(delimiter);
-    const el = headers.reduce(function (object, header, index) {
-      object[header] = values[index];
-      return object;
-    }, {});
-    return el;
-  });
-
-  return arr;
+//handle json
+function jsonToArray(str){
+    let fromJson = JSON.parse(str);
+  for (let i = 0; i < fromJson.length; i++){
+        q = fromJson[i].question;
+        a = fromJson[i].answer;
+        cardsCustom.push(cardFactory(q, a));
+        console.log(cardsCustom)
+    }
 }
 
+//handle csv
 function csvToArray(str){
     // slice from \n index + 1 to the end of the text
     // use split to create an array of each csv value row
@@ -442,41 +433,73 @@ function csvToArray(str){
       let a = rows[i].split(",")[1];
       cardsCustom.push(cardFactory(q, a));
   }
-
 }
 
-// when file is selected
-csvFile.addEventListener('change', ()=>{
+// when the custom file is selected
+customFile.addEventListener('change', ()=>{
     //display file name
     let newFile = document.querySelector("input[type=file]").files[0];
     fileName.innerText = newFile.name;
-    
-
-    //convert file into array of cards
-
-    //make this array customArray
-
+    statusName.innerText = newFile.name;
+    //convert file into array of cards?
+    //make this array customArray?
 })
 
 // when the form is submitted with confirmBtn
 uploadForm.addEventListener("submit", function () {
-  const input = csvFile.files[0];
+  const input = customFile.files[0];
   const reader = new FileReader();
+  const extension = getExtension(input.name)
+  //console.log(input)
+
+  if (extension == "csv") {
+      //reader.readAsText(input);
+    reader.onload = function (e) {
+        const text = e.target.result;
+        csvToArray(text);
+        }
+    } else if (extension == "json") {
+
+        //console.log("hello")
+        // let json = JSON.stringify(input);
+        // const blob = new Blob([json], {type:"application/json"});
+
+        // console.log(blob)
+        // reader.onload = function (e) {
+        //     console.log(e.target.result, JSON.parse(reader.result))
+        //   };
+        // jsonToArray(text);
+        // reader.readAsText(blob);
 
 
-  reader.onload = function (e) {
-    const text = e.target.result;
-    // const data = csvToArray(text);
-    csvToArray(text)
+        // reader.onload = (function (input) {
+		// 	return function (e) {
+		// 		console.log('e readAsText = ', e);
+		// 		console.log('e readAsText target = ', e.target);
+		// 		try {
+		// 			json = JSON.parse(e.target.result);
+		// 			alert('json global var has been set to parsed json of this file here it is unevaled = \n' + JSON.stringify(json));
+		// 		} catch (ex) {
+		// 			alert('ex when trying to parse json = ' + ex);
+		// 		}
+		// 	}
+		// })(f);
+		// reader.readAsText(f);
 
-    //--this will be done on load dialog
-    // currentArray = JSON.parse(JSON.stringify(cardsCustom))
-    //confirmBtn.value = cardsCustom;
-    // document.write(JSON.stringify(data));
-  };
+        reader.onload = function (e) {
+            const text = e.target.result;
+            console.log(text)
+            jsonToArray(text);
+            }
+        // jsonToArray(text);
 
-  reader.readAsText(input);
+        //confirmBtn.value = selectEl.value
+        currentArray = JSON.parse(JSON.stringify(cardsCustom))
+        }
 
+    reader.readAsText(input)
+
+    
   //make sure the card displays the question side
   $("#card").flip(false)
 });
@@ -538,7 +561,7 @@ $(document).keydown(function(e){
     if (e.which == 83) {     
         for (let i=0; i<currentArray.length; i++){
             if (currentArray[i].question === tempArray[0].question){
-                    currentArray[i].rating --;
+                    currentArray[i].rating--;
             }
         };
 
@@ -548,7 +571,7 @@ $(document).keydown(function(e){
     } else if (e.which == 40){
         for (let i=0; i<currentArray.length; i++){
             if (currentArray[i].question === tempArray[0].question){
-                    currentArray[i].rating --;
+                    currentArray[i].rating--;
             }
         };
 
