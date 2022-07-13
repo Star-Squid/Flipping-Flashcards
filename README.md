@@ -14,10 +14,17 @@ This project's idea was to create a study tool that:
 
 ## Keyboard shortcuts:
 backspace - back to home screen
+
 R - refresh
+
 Q - question/about
+
 O - options
+
 space - flip card
+
 ← / A - rate 1 star
+
 ↓ / S - rate 2 stars
+
 → / D - rate 3 stars
