@@ -42,9 +42,9 @@ function checkAndShow(dlg) {
 
 //"Back to home"
 $("#back").on("click", function () {
-    let dlg = document.getElementById("backdialog");
-    checkAndShow(dlg);
-  });
+  let dlg = document.getElementById("backdialog");
+  checkAndShow(dlg);
+});
 
 //"About"
 $("#about").on("click", function () {
@@ -72,7 +72,7 @@ $("#loadset").on("click", function () {
 });
 
 //CARD HANDLING STARTS HERE
-let currentArray;
+let currentArray = [];
 let tempArray = [];
 let statusCurrCardVal = 0;
 // let statusCurrCardTotal = 0;
@@ -81,46 +81,47 @@ let statusCurrCardVal = 0;
 // --------------------------------------
 // const customFileButton = document.getElementById("customFile");
 // let fileName = document.getElementById("file-name");
-let recentChange
+// const reader = new FileReader();
+let recentChange;
 
 //check extension
 function getExtension(filename) {
-    var parts = filename.split('.');
-    return parts[parts.length - 1];
-  }
+  var parts = filename.split(".");
+  return parts[parts.length - 1];
+}
 
 //handle json
-function jsonToArray(str){
-    let fromJson = JSON.parse(str);
-  for (let i = 0; i < fromJson.length; i++){
-        q = fromJson[i].question;
-        a = fromJson[i].answer;
-        cardsCustom.push(cardFactory(q, a));
-        console.log(cardsCustom)
-    }
+function jsonToArray(str) {
+  let fromJson = JSON.parse(str);
+  cardsCustom.length = 0;
+
+  for (let i = 0; i < fromJson.length; i++) {
+    q = fromJson[i].question;
+    a = fromJson[i].answer;
+    cardsCustom.push(cardFactory(q, a));
+  }
 }
 
 //handle csv
-function csvToArray(str){
-    // slice from \n index + 1 to the end of the text
-    // use split to create an array of each csv value row
+function csvToArray(str) {
+  // slice from \n index + 1 to the end of the text
+  // use split to create an array of each csv value row
   const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+  cardsCustom.length = 0;
 
-  for (let i = 0; i<rows.length; i++){
-      let q = rows[i].split(",")[0];
-      let a = rows[i].split(",")[1];
-      cardsCustom.push(cardFactory(q, a));
+  for (let i = 0; i < rows.length; i++) {
+    let q = rows[i].split(",")[0];
+    let a = rows[i].split(",")[1];
+    cardsCustom.push(cardFactory(q, a));
   }
 }
 
 // update titles when the custom file is selected
-$("#customFile").on("change", function(){
-    let newFile = document.querySelector("input[type=file]").files[0].name;
-    $("#status-name, #file-name").text(newFile);
-    recentChange = "custom";
-})
-
-//------------------------------------
+$("#customFile").on("change", function () {
+  let newFile = document.querySelector("input[type=file]").files[0].name;
+  $("#status-name, #file-name").text(newFile);
+  recentChange = "custom";
+});
 
 //CARD SET SELECTION FORM
 
@@ -133,66 +134,57 @@ $("select").on("change", function () {
 // when form is submitted - "OK" button triggers "close" on dialog because of [method="dialog"]
 $("#loaddialog").on("close", function () {
   let formValue = document.getElementById("loaddialog").returnValue;
-  const reader = new FileReader();
+  const input = document.querySelector("input[type=file]").files[0];
 
-  if (recentChange === "custom"){
-    // const input = customFile.files[0];
-    const input = document.querySelector("input[type=file]").files[0];
+  if (recentChange === "custom") {
+    //check type of file uploaded
+    const extension = getExtension(input.name);
 
-    const extension = getExtension(input.name)
-   
-    //check type of file uploaded, 
-    if (extension == "csv") {
-        //reader.readAsText(input);
+    if (extension === "csv") {
+      let reader = new FileReader();
+      reader.readAsText(input);
+
       reader.onload = function (e) {
-          const text = e.target.result;
-          csvToArray(text);
-          }
-          currentArray = JSON.parse(JSON.stringify(cardsCustom))
-          currentArray.forEach((card) => (card.rating = difficulty));
+        const text = e.target.result;
+        csvToArray(text);
+        currentArray = JSON.parse(JSON.stringify(cardsCustom));
+        currentArray.forEach((card) => (card.rating = difficulty));
 
-  
-      } else if (extension == "json") {
-          reader.onload = function (e) {
-              const text = e.target.result;
-              console.log(text)
-              jsonToArray(text);
-              }
-  
-          //confirmBtn.value = selectEl.value
-          currentArray = JSON.parse(JSON.stringify(cardsCustom));
-          currentArray.forEach((card) => (card.rating = difficulty));
+        nextCard(currentArray);
+      };
+    } else if (extension === "json") {
+      let reader = new FileReader();
+      reader.readAsText(input);
 
-          //confirmBtn.value =  JSON.parse(JSON.stringify(cardsCustom))
-          }
+      reader.onload = function (e) {
+        const text = e.target.result;
+        jsonToArray(text);
+        currentArray = JSON.parse(JSON.stringify(cardsCustom));
+        currentArray.forEach((card) => (card.rating = difficulty));
+        nextCard(currentArray);
+      };
+    }
 
-    formValue = input.name
-      reader.readAsText(input)
+    formValue = input.name;
+  } else if (recentChange === "builtin") {
+    //fill currentArray depending on form value and difficulty (this is the only place to set new difficulty)
+    if (formValue === "English county towns") {
+      currentArray = JSON.parse(JSON.stringify(cardsCounty));
+      currentArray.forEach((card) => (card.rating = difficulty));
+    } else if (formValue === "CSS concepts") {
+      currentArray = JSON.parse(JSON.stringify(cardsCSS));
+      currentArray.forEach((card) => (card.rating = difficulty));
+    } else if (formValue === "Javascript") {
+      currentArray = JSON.parse(JSON.stringify(cardsJavascript));
+      currentArray.forEach((card) => (card.rating = difficulty));
+    }
+  } //end recentchange check
 
-  } else if (recentChange === "builtin"){
-
-  //fill currentArray depending on form value and difficulty (this is the only place to set new difficulty)
-  if (formValue === "English county towns") {
-    currentArray = JSON.parse(JSON.stringify(cardsCounty));
-    currentArray.forEach((card) => (card.rating = difficulty));
-  } else if (formValue === "CSS concepts") {
-    currentArray = JSON.parse(JSON.stringify(cardsCSS));
-    currentArray.forEach((card) => (card.rating = difficulty));
-  } else if (formValue === "Javascript") {
-    currentArray = JSON.parse(JSON.stringify(cardsJavascript));
-    currentArray.forEach((card) => (card.rating = difficulty));
-  } else {
-    currentArray = JSON.parse(JSON.stringify(cardsCustom));
-    currentArray.forEach((card) => (card.rating = difficulty));
-  }
-
-}//end recentchange check
   if (formValue !== "cancel" && formValue !== "default") {
     $("#status-name").text(formValue);
     $("#containcard").removeClass("disappear");
-    $(".card-menu").removeClass("disappear")
+    $(".card-menu").removeClass("disappear");
   }
-
 
   nextCard(currentArray);
 });
@@ -200,17 +192,15 @@ $("#loaddialog").on("close", function () {
 //CARD HANDLING
 $("#good").mousedown(function () {
   // find this tempArray card in currentArray and remove 2 rating points there
-  let currentIndex = currentArray.indexOf(tempArray[0])
-    currentArray[currentIndex].rating -= 2;
-
+  let currentIndex = currentArray.indexOf(tempArray[0]);
+  currentArray[currentIndex].rating -= 2;
   nextCard(currentArray);
 });
 
 $("#medium").mousedown(function () {
   // remove 1 rating point
-  let currentIndex = currentArray.indexOf(tempArray[0])
-    currentArray[currentIndex].rating--;
-
+  let currentIndex = currentArray.indexOf(tempArray[0]);
+  currentArray[currentIndex].rating--;
   nextCard(currentArray);
 });
 
@@ -222,15 +212,11 @@ function nextCard(array) {
   // extract all ratings from the questions
   let arrayRatings = [];
 
-  //if (currentArray) {
-    for (let j = 0; j < array.length; j++) {
-      arrayRatings.push(array[j].rating);
-    }
-  //}
+  for (let j = 0; j < array.length; j++) {
+    arrayRatings.push(array[j].rating);
+  }
 
-  // clear out tempArray if needed
   tempArray.length = 0;
-
   // for every question in currentArray, push it to tempArray as many times as its rating shows
   if (currentArray) {
     for (let k = 0; k < array.length; k++) {
@@ -250,12 +236,27 @@ function nextCard(array) {
         case 5:
           tempArray.push(array[k], array[k], array[k], array[k], array[k]);
           break;
-          case 6:
-            tempArray.push(array[k], array[k], array[k], array[k], array[k], array[k]);
-            break;
-            case 7:
-                tempArray.push(array[k], array[k], array[k], array[k], array[k], array[k], array[k]);
-                break;
+        case 6:
+          tempArray.push(
+            array[k],
+            array[k],
+            array[k],
+            array[k],
+            array[k],
+            array[k]
+          );
+          break;
+        case 7:
+          tempArray.push(
+            array[k],
+            array[k],
+            array[k],
+            array[k],
+            array[k],
+            array[k],
+            array[k]
+          );
+          break;
       }
     }
   }
@@ -276,8 +277,6 @@ function nextCard(array) {
     );
 
     let ratingWithDifficulty = (currentArray[i].rating * 105) / difficulty; //105 is LCD for 3, 5, and 7
-    //console.log("ratingWithDifficulty: ", ratingWithDifficulty);
-
     if (ratingWithDifficulty >= 80) {
       $("#status-card-rating").text("card rating ☆☆☆");
     } else if (ratingWithDifficulty >= 55 && ratingWithDifficulty <= 79) {
@@ -292,7 +291,6 @@ function nextCard(array) {
 
     //calculate and update rating for the set
     statusAvgRatingVal = createAverage(currentArray);
-    //console.log("statusAvgRatingVal: ", statusAvgRatingVal);
 
     if (statusAvgRatingVal >= 80) {
       $("#status-avg-rating").text("avg rating ☆☆☆");
@@ -305,8 +303,6 @@ function nextCard(array) {
     } else {
       $("#status-avg-rating").text("avg rating ?");
     }
-
-    //};
   }
 
   // check if there is anything left in the array and display message or next card.
@@ -324,5 +320,5 @@ function nextCard(array) {
       $("#question").html(tempArray[0].question);
       $("#answer").html(tempArray[0].answer);
     }
-  }, 200);
+  }, 300);
 }
