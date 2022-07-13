@@ -40,13 +40,11 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
     <script src="https://kit.fontawesome.com/cdc678f69f.js" crossorigin="anonymous"></script>
     <script src="js/jquery.flip.min.js" charset="utf-8" defer></script>
-    <script src="js/swiped-events.js" charset="utf-8" defer></script>
-    <script src="js/sophisticated.js" charset="utf-8" defer></script>
+    <script src="js/game.js" charset="utf-8" defer></script>
+    <script src="js/cardfactory.js" charset="utf-8" defer></script>
   </head>
 
 <body>
-
-
   <div class="container">
 
     <nav class="right-menu">
@@ -65,7 +63,7 @@
 
     <nav class="left-menu">
       <div class="title-section">
-      <a href="index.html" id="back"><h2 class="functional" title="Back to home screen"><i class="fa-solid fa-angle-left"></i></h2></a>
+      <h2 class="functional" id="back" title="Back to home screen"><i class="fa-solid fa-angle-left"></i></h2>
           <h3>Flipping<br>Flashcards</h3>
       </div>
       <div class="info-section">
@@ -156,11 +154,12 @@
          
             <input type="file" id="customFile" name="customFile" accept=".csv, .json">
             
-<span id="file-name"></span>
+            <span id="file-name"></span>
             
         </form>
       </dialog>
 
+      <!-- about dialog -->
       <dialog id="aboutdialog" class="dialog">
 
         <form method='dialog'>
@@ -220,6 +219,35 @@
         </form>
       </dialog>
 
+      <!-- back dialog -->
+      <dialog id="backdialog" class="dialog">
+
+        <form method='dialog'>
+
+          <h2>
+            Are you sure you want to quit to home screen?
+          </h2>
+           
+            <button value="cancel" class="pushable small">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span type="button" value="cancel" type="cancel" class="frontbtn">
+                cancel
+              </span>
+            </button>
+        </form>
+
+        <form action="./index.html" method='POST'>
+            <button value="submit" class="pushable small primary">
+              <span role="presentation" class="shadow"></span>
+              <span role="presentation" class="edge"></span>
+              <span type="button" value="Submit" type="submit" class="frontbtn">
+                Quit!
+              </span>
+            </button>           
+        </form>
+      </dialog>
+
 
       <!-- options dialog -->
       <dialog id="optionsdialog" class="dialog">
@@ -237,17 +265,18 @@
             <br><br>
            </div>
                         <p>
-                <strong>Difficulty (requires refreshing the card set):</strong>
+                <strong>Difficulty (requires reloading the card set):</strong><br>
+                this refers to how many perfect answers are needed to prevent repeating a given card again
               </p>
               <div class="radio">
                   <input type="radio" id="easy-diff" name="difficulty" value="easy-diff" onclick="setDifficulty(3)">
-                  <label for="easy-diff">easy</label><br>
+                  <label for="easy-diff">easy (2 perfect answers)</label><br>
 
                   <input type="radio" id="medium-diff" name="difficulty" value="medium-diff" onclick="setDifficulty(5)">
-                  <label for="medium-diff">medium</label><br>
+                  <label for="medium-diff">medium (3 perfect answers)</label><br>
 
                   <input type="radio" id="hard-diff" name="difficulty" value="hard-diff" onclick="setDifficulty(7)">
-                  <label for="hard-diff">hard</label>
+                  <label for="hard-diff">hard (4 perfect answers)</label>
                 </div> 
     
           <menu>

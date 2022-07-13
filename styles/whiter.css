@@ -4,10 +4,6 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 :root.neon {
   --background: url("../img/neon.jpg");
 
@@ -22,9 +18,12 @@ html {
   --violet: #7F3BC3;
 
   --dark: rgba(104, 60, 241, 1);
-  --halfdark: rgba(49, 9, 170, 0.4);
+  --halfdark: rgba(49, 9, 170, 0.6);
   --medium: rgb(55, 40, 169);
   --halfmedium: rgba(93,106,220, 0.8);
+
+  --scrollbarBG: #7F3BC3;
+  --thumbBG: #FBB279;
 }
 
 :root {
@@ -44,7 +43,34 @@ html {
   --halfdark: rgba(31, 40, 79, 0.8);
   --medium: #404C82;
   --halfmedium: rgba(64, 76, 130, 0.8);
+
+  --scrollbarBG: #404C82;
+  --thumbBG: #C0C3D6;
 }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 20px;
+  border: 3px solid var(--scrollbarBG);
+}
+
 
 body {
 	height: 100vh;
@@ -68,15 +94,23 @@ body {
   width: 100vw;
   height: 100vh;
 
-  /* scrollbar-width: thin;
-  scrollbar-color: var(--dark) var(--lightgrey);
-  overflow-x: hidden; */
 }
-
+/* 
+body::-webkit-scrollbar {
+  width: 11px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
 
 body:after{
   display:none;
-}
+} */
 
 h1 {
   font-family: 'Supermercado One', cursive;
@@ -533,11 +567,13 @@ dialog {
 
   /* scrollbar-width: thin;
   scrollbar-color: var(--dark) var(--lightgrey); */
+  /* scrollbar-width: thin; */
+  /* scrollbar-color: inherit; */
 
 }
 
 dialog::backdrop {
-  background-color: rgba(31, 40, 79, 0.8);
+  background-color: rgba(31, 40, 79, 0.6);
 }
 
 .container #aboutdialog :not(:last-child){
@@ -610,4 +646,12 @@ display: none;
 #optionsdialog{
   min-width: 10rem;
   text-align: left;
+}
+
+#backdialog h2 {
+padding-bottom: 2rem;
+}
+
+#backdialog form {
+  display: inline;
 }
